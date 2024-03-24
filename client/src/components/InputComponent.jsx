@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
 import AnalysisResult from './AnalysisResult';
-import CorrectionOptions from './CorrectionOptions';
-import FeedbackMessage from './FeedbackMessage';
 import Button from './Button';
 
 const socket = io('http://localhost:5000');
@@ -25,7 +22,7 @@ function TextInputComponent() {
         })
 
         socket.on('analysis_update', (data) => {
-            setAnalysisResult(prevSteps => [...prevSteps, `Sentiment is ${data.result}`]);
+            setAnalysisResult(prevSteps => [...prevSteps, data.result]);
             setDocumentId(data._id);
             setIsLoading(false);
         });
@@ -58,7 +55,9 @@ function TextInputComponent() {
         e.preventDefault();
         setIsLoading(true);
         setFeedbackMessage('');
+        setAnalysisSteps([]);
         setAnalysisResult([]);
+        setInputText('');
         
         socket.emit('analyse_text', { text: inputText });
     };
@@ -87,12 +86,16 @@ function TextInputComponent() {
             </form>
             {isLoading && <LoadingSpinner />}
             {!isLoading && analysisResult && (
-                <AnalysisResult analysisResult={analysisResult} analysisSteps={analysisSteps} setShowCorrection={setShowCorrection} />
+                <AnalysisResult 
+                analysisResult={analysisResult} 
+                analysisSteps={analysisSteps} 
+                setShowCorrection={setShowCorrection} 
+                handleSentimentCorrection={handleSentimentCorrection} 
+                showCorrection={showCorrection} 
+                feedbackMessage={feedbackMessage}
+                />
             )}
-            {showCorrection && (
-                <CorrectionOptions handleSentimentCorrection={handleSentimentCorrection} />
-            )}
-            {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
+            
             </div>
   );
 }

@@ -77,7 +77,7 @@ def submit_correction(data):
     if document_id and corrected_sentiment:
         updated_count = db.update_sentiment_by_id(document_id, corrected_sentiment)
         if updated_count:
-            socketio.emit('correction_response', {'message': 'Correction submitted successfully, thank you!', 'updated': updated_count})
+            socketio.emit('correction_response', {'message': 'Correction submitted successfully, thank you!\nVerified sentiments are used for training purposes', 'updated': updated_count})
         else:
             socketio.emit('correction_error', {'error': 'Document not found or update failed'})
     else:
