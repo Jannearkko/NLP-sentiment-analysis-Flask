@@ -1,44 +1,9 @@
-from flask import Flask, jsonify, request, send_from_directory
-import requests
-from flask_cors import CORS
-import os
-from urllib.parse import urljoin
+from flask import current_app as app
+from app.db import db
 import tensorflow as tf
-from keras.models import load_model
-from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
-import pickle
-from sklearn.preprocessing import LabelEncoder
-from dotenv import load_dotenv
-import os
-import db
-from flask_socketio import SocketIO
-import asyncio
 
-
-def create_app():
-    app = Flask(__name__, static_folder='client/build', static_url_path='')
-    CORS(app)
-    app.dependencies = load_dependencies()
-    return app
-
-def load_dependencies():
-    # load the latest model
-    model = load_model('./model/best_model.h5')
-    # load tokenizer
-    with open('./model/tokenizer.pickle', 'rb') as handle:
-        tokenizer = pickle.load(handle)
-    # load label encoder
-    with open('./model/label_encoder.pickle', 'rb') as file:
-        label_encoder = pickle.load(file)
-    return {"model": model, "tokenizer": tokenizer, "label_encoder": label_encoder}
-
-app = create_app()
-socketio = SocketIO(app, cors_allowed_origins='http://localhost:3000')
-
-# client-side route to access the model
-@socketio.on('analyse_text')
-def predict_sentiment(json):
+def predict_sentiment(json, socketio):
     text = json.get('text')
     if text:
         socketio.emit('analysis_step', {'message': f'Input: {text}'})
@@ -67,22 +32,15 @@ def predict_sentiment(json):
     else:
         socketio.emit('analysis_error', {'error': 'No text provided'})
 
-    
-# submit correction to sentiment -route
-@socketio.on('submit_correction')
-def submit_correction(data):
+def submit_correction(data, socketio):
     document_id = data.get('_id')
     corrected_sentiment = data.get('correctedSentiment')
     print(data)
     if document_id and corrected_sentiment:
         updated_count = db.update_sentiment_by_id(document_id, corrected_sentiment)
         if updated_count:
-            socketio.emit('correction_response', {'message': 'Correction submitted successfully, thank you!\nVerified sentiments are used for training purposes', 'updated': updated_count})
+            socketio.emit('correction_response', {'message': 'Correction submitted successfully, thank you!\nVerified sentiments are used for further training', 'updated': updated_count})
         else:
             socketio.emit('correction_error', {'error': 'Document not found or update failed'})
     else:
         socketio.emit('correction_error', {'error': 'Missing document ID or corrected sentiment'})
-    
-
-if __name__ == '__main__':
-    socketio.run(app, debug=True)

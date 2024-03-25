@@ -63,6 +63,7 @@ function TextInputComponent() {
     };
     const handleSentimentCorrection = async (sentiment) => {
         setCorrectedSentiment(sentiment);
+        setAnalysisResult(sentiment)
         setShowCorrection(false);
     
         socket.emit('submit_correction', { _id: documentId, correctedSentiment: sentiment });
@@ -80,7 +81,9 @@ function TextInputComponent() {
                 />
                 <Button 
                     type="submit"
-                    color='blue'>
+                    color='blue'
+                    className='w-full'
+                    >
                     Analyze
                 </Button>
             </form>

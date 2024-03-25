@@ -29,7 +29,7 @@ function AnalysisResult({ analysisResult, analysisSteps ,setShowCorrection, hand
                         <div className='analysis-result mt-2 text-left'>
                             <strong>Sentiment:</strong> <span className="result-content text-xl">{analysisResult}</span>
 
-                            <Button onClick={() => setShowCorrection(show => !show)} color="green" className='mt-2'>
+                            <Button onClick={() => setShowCorrection(show => !show)} color="green" className='w-full mt-2'>
                             Verify Sentiment
                             </Button>
                             {showCorrection && (
