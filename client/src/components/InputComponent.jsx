@@ -3,8 +3,10 @@ import io from 'socket.io-client';
 import LoadingSpinner from './LoadingSpinner';
 import AnalysisResult from './AnalysisResult';
 import Button from './Button';
+import { useSelector } from 'react-redux';
 
 const socket = io('http://localhost:5000');
+const ANALYSIS_LIMIT = 5;
 
 function TextInputComponent() {
     const [inputText, setInputText] = useState('');
@@ -15,8 +17,17 @@ function TextInputComponent() {
     const [showCorrection, setShowCorrection] = useState(false);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isLimitReached, setIsLimitReached] = useState(false);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
     useEffect(() => {
+        
+        const requestCount = parseInt(localStorage.getItem('analysisRequestCount') || '0', 10);
+        if (requestCount >= ANALYSIS_LIMIT) {
+            setIsLimitReached(true);
+        };
+
+
         socket.on('analysis_step', (data) => {
             setAnalysisSteps(prevSteps => [...prevSteps, data.message]);
         })
@@ -57,9 +68,18 @@ function TextInputComponent() {
         setFeedbackMessage('');
         setAnalysisSteps([]);
         setAnalysisResult([]);
-        setInputText('');
-        
-        socket.emit('analyse_text', { text: inputText });
+
+        const requestCount = parseInt(localStorage.getItem('analysisRequestCount') || '0', 10);
+
+        if (isAuthenticated || requestCount < ANALYSIS_LIMIT) {
+            localStorage.setItem('analysisRequestCount', requestCount + 1);
+            setInputText('');
+            socket.emit('analyse_text', { text: inputText });
+        } else {
+            setIsLimitReached(true);
+            setIsLoading(false);
+        }
+
     };
     const handleSentimentCorrection = async (sentiment) => {
         setCorrectedSentiment(sentiment);
