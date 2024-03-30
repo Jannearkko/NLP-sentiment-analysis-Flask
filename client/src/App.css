@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  display: flex;
+  height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +37,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+#body {
+  display: flex;
+  width: 100%;
+}
+#sidebar-div {
+  flex: 1;
+  background-color: aliceblue;
+}
+#input-div {
+  flex: 4;
 }

@@ -5,6 +5,7 @@ import AnalysisResult from './AnalysisResult';
 import Button from './Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { limitReached } from '../redux/slices/AuthSlice'
+import LimitReachedMessage from './LimitReachedMessage';
 
 const socket = io('http://localhost:5000');
 const ANALYSIS_LIMIT = 5;
@@ -36,7 +37,7 @@ function TextInputComponent() {
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+    const isLimitReached = useSelector((state) => state.auth.isLimitReached)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -88,7 +89,7 @@ function TextInputComponent() {
             const now = new Date();
             const item = {
                 value: requestCount + 1,
-                expiry: now.getTime() + 10000
+                expiry: now.getTime() + 3600000
             };
 
             localStorage.setItem('analysisRequestCount', JSON.stringify(item));
@@ -136,6 +137,9 @@ function TextInputComponent() {
                 showCorrection={showCorrection} 
                 feedbackMessage={feedbackMessage}
                 />
+            )}
+            {!isLoading && isLimitReached && !isAuthenticated && (
+                <LimitReachedMessage />
             )}
             
             </div>

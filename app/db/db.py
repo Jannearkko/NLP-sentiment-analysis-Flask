@@ -12,6 +12,7 @@ def get_db():
     return client['NLP-DB']
 
 def save_to_train_collection(document):
+    print(document)
     db = get_db()
     result = db['train-collection'].insert_one(document)
     return result.inserted_id
@@ -25,7 +26,7 @@ def update_sentiment_by_id(document_id, corrected_sentiment):
     db = get_db()
     result = db['train-collection'].update_one(
         {"_id": ObjectId(document_id)},
-        {"$set": {"sentiment": corrected_sentiment}}
+        {"$set": {"sentiment": corrected_sentiment, "verified": True}}
     )
     return result.modified_count
 
@@ -47,7 +48,7 @@ def get_user_by_username(username, submitted_password):
     
     return None
 
-def register_user(username, password):
+def register_user(username, password, firstname, lastname):
     db = get_db()
     hashed_password = generate_password_hash(password)
 
@@ -57,6 +58,21 @@ def register_user(username, password):
 
     result = db['user-collection'].insert_one({
         "username": username,
-        "password_hash": hashed_password  # Store the hashed password
+        "password_hash": hashed_password,  # Store the hashed password
+        "firstname": firstname,
+        "lastname": lastname
     })
     return result.inserted_id
+
+def get_user_queries(username):
+    db = get_db()
+    user = db['user-collection'].find_one({"username": username})
+
+    if user:
+        queries = db['train-collection'].find({"username": username})
+        queries_list = []
+        for query in queries:
+            query['_id'] = str(query['_id'])
+            queries_list.append(query)
+
+        return queries_list

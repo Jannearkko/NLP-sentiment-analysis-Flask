@@ -14,7 +14,7 @@ module.exports = {
       ],
     },
   },
-  darkMode: true, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     fontFamily: {
       'body': ['"Open Sans"', 'sans-serif'],

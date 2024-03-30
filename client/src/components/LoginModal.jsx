@@ -59,6 +59,7 @@ const LoginModal = ({ onClose, onRegister }) => {
                 />
                 <Button className="w-full" color="green" onClick={handleLogin}>Login</Button>
                 <Button className="w-full" color="blue" onClick={onRegister}>Register</Button>
+                <Button className="w-full" color="gray" onClick={onClose}>Close</Button>
                 {loginError && <div className="text-red-500 text-sm mb-2">{loginError}</div>}
             </div>
 

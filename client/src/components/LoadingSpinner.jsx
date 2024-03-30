@@ -1,6 +1,6 @@
 import { ReactComponent as Spinner } from '../icons/cogwheel.svg';
 
-function LoadingSpinner() {
+export function LoadingSpinner() {
   return (
     <div className="flex justify-center items-center">
       <Spinner className="animate-spin h-5 w-5" />

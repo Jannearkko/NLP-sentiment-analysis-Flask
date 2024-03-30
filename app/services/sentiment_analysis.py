@@ -15,6 +15,7 @@ def predict_sentiment(json, socketio):
 
         # adding padding
         padded_sequence = pad_sequences(sequence, maxlen=30)
+        padded_sequence_to_db = [padded_sequence.tolist()[0]]
         socketio.emit('analysis_step', {'message': f'Padded sequence: {padded_sequence}'})
 
         # Making predictions
@@ -29,7 +30,13 @@ def predict_sentiment(json, socketio):
         # check for user
         user = db.get_user(username)
         if user:
-            document = {'text': text, 'sentiment': result[0], 'username': username, 'verified': None}
+            document = {
+                'text': text, 
+                'sentiment': result[0], 
+                'username': username, 
+                'sequence': sequence,
+                'padded_sequence': padded_sequence_to_db,
+                'verified': None}
             inserted_id = db.save_to_train_collection(document)
             socketio.emit('analysis_update', {'message': 'Text analysed', 'result': result, '_id': str(inserted_id)})
         else:

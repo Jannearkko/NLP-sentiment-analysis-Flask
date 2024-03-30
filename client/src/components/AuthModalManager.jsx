@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import LoginModal from './LoginModal';
+import React, { useEffect } from 'react';
 import RegisterModal from './RegisterModal';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setModalState } from '../redux/slices/AuthSlice';
 
 const AuthenticationModalManager = () => {
-    const [modalState, setModalState] = useState('none'); // 'login', 'register', or 'none'
+    const modalState = useSelector((state) => state.auth.modalState); // 'login', 'register', or 'none'
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const isLimitReached = useSelector((state) => state.auth.isLimitReached);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (localStorage.getItem('token') || isAuthenticated) {
-            setModalState('none');
+            dispatch(setModalState('none'));
         } else if (isLimitReached) {
-            setModalState('login');
+            dispatch(setModalState('login'));
         }
-    }, [isAuthenticated, isLimitReached]);
+    }, [isAuthenticated, isLimitReached, dispatch]);
 
     return (
         <div>
-            {modalState === 'login' && <LoginModal onRegister={() => setModalState('register')} onClose={() => setModalState('none')} />}
-            {modalState === 'register' && <RegisterModal onClose={() => setModalState('login')} />}
+            {modalState === 'register' && <RegisterModal onClose={() => dispatch(setModalState('none'))} />}
         </div>
     );
 };
