@@ -3,10 +3,28 @@ import io from 'socket.io-client';
 import LoadingSpinner from './LoadingSpinner';
 import AnalysisResult from './AnalysisResult';
 import Button from './Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { limitReached } from '../redux/slices/AuthSlice'
 
 const socket = io('http://localhost:5000');
 const ANALYSIS_LIMIT = 5;
+
+export function getAnalysisRequestCount() {
+    const itemStr = localStorage.getItem('analysisRequestCount');
+    if (!itemStr) {
+        return null;
+    }
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+    
+    if (now.getTime() > item.expiry) {
+        localStorage.removeItem('analysisRequestCount');
+        return 0;
+    }
+    
+    // If not expired, return the value
+    return item.value;
+}
 
 function TextInputComponent() {
     const [inputText, setInputText] = useState('');
@@ -17,17 +35,11 @@ function TextInputComponent() {
     const [showCorrection, setShowCorrection] = useState(false);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isLimitReached, setIsLimitReached] = useState(false);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        
-        const requestCount = parseInt(localStorage.getItem('analysisRequestCount') || '0', 10);
-        if (requestCount >= ANALYSIS_LIMIT) {
-            setIsLimitReached(true);
-        };
-
-
         socket.on('analysis_step', (data) => {
             setAnalysisSteps(prevSteps => [...prevSteps, data.message]);
         })
@@ -69,15 +81,22 @@ function TextInputComponent() {
         setAnalysisSteps([]);
         setAnalysisResult([]);
 
-        const requestCount = parseInt(localStorage.getItem('analysisRequestCount') || '0', 10);
+        const requestCount = getAnalysisRequestCount();
+        const username = localStorage.getItem('username');
 
         if (isAuthenticated || requestCount < ANALYSIS_LIMIT) {
-            localStorage.setItem('analysisRequestCount', requestCount + 1);
+            const now = new Date();
+            const item = {
+                value: requestCount + 1,
+                expiry: now.getTime() + 10000
+            };
+
+            localStorage.setItem('analysisRequestCount', JSON.stringify(item));
             setInputText('');
-            socket.emit('analyse_text', { text: inputText });
+            socket.emit('analyse_text', { text: inputText, username: username });
         } else {
-            setIsLimitReached(true);
             setIsLoading(false);
+            dispatch(limitReached());
         }
 
     };

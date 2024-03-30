@@ -1,5 +1,4 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
 import TextInputComponent from './components/InputComponent';
 import ErrorBoundary from './components/ErrorBoundary';
 import AuthenticationModalManager from './components/AuthModalManager';

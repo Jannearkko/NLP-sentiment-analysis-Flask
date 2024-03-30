@@ -5,6 +5,7 @@ from keras.preprocessing.sequence import pad_sequences
 
 def predict_sentiment(json, socketio):
     text = json.get('text')
+    username = json.get('username')
     if text:
         socketio.emit('analysis_step', {'message': f'Input: {text}'})
 
@@ -24,11 +25,17 @@ def predict_sentiment(json, socketio):
         predicted_class_indices = predictions.argmax(axis=1)
         predicted_label = app.dependencies['label_encoder'].inverse_transform(predicted_class_indices)
         result = predicted_label.tolist()
-        document = {'text': text, 'sentiment': result[0]}
-        inserted_id = db.save_to_train_collection(document)
-        
-        socketio.emit('analysis_update', {'message': 'Text analysed', 'result': result, '_id': str(inserted_id)})
 
+        # check for user
+        user = db.get_user(username)
+        if user:
+            document = {'text': text, 'sentiment': result[0], 'username': username, 'verified': None}
+            inserted_id = db.save_to_train_collection(document)
+            socketio.emit('analysis_update', {'message': 'Text analysed', 'result': result, '_id': str(inserted_id)})
+        else:
+            document = {'text': text, 'sentiment': result[0]}
+            inserted_id = db.save_to_non_verified(document)
+            socketio.emit('analysis_update', {'message': 'Text analysed', 'result': result, '_id': str(inserted_id)})
     else:
         socketio.emit('analysis_error', {'error': 'No text provided'})
 

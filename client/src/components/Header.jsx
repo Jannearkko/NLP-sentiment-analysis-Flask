@@ -23,7 +23,7 @@ const Header = () => {
             <Button color='red' onClick={handleLogout}>Logout</Button>
             </div>
         ) : (
-          <p>Lololo</p>
+          <p>Sentiment analysis</p>
         )}
         </header>
     </div>

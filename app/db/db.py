@@ -16,6 +16,11 @@ def save_to_train_collection(document):
     result = db['train-collection'].insert_one(document)
     return result.inserted_id
 
+def save_to_non_verified(document):
+    db = get_db()
+    result = db['not-verified-texts'].insert_one(document)
+    return result.inserted_id
+
 def update_sentiment_by_id(document_id, corrected_sentiment):
     db = get_db()
     result = db['train-collection'].update_one(
@@ -23,6 +28,13 @@ def update_sentiment_by_id(document_id, corrected_sentiment):
         {"$set": {"sentiment": corrected_sentiment}}
     )
     return result.modified_count
+
+def get_user(username):
+    db = get_db()
+    user = db['user-collection'].find_one({"username": username})
+    if user:
+        return user
+    return None
 
 def get_user_by_username(username, submitted_password):
     db = get_db()

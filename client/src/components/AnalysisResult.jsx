@@ -1,9 +1,12 @@
 import Button from "./Button";
 import CorrectionOptions from "./CorrectionOptions";
 import FeedbackMessage from "./FeedbackMessage";
+import { useSelector } from 'react-redux';
 
 function AnalysisResult({ analysisResult, analysisSteps ,setShowCorrection, handleSentimentCorrection, showCorrection, feedbackMessage }) {
     const prefixes = ['Input','Sequence','Padded sequence','Predictions']
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+
     return (
         <div className="w-full my-4">
             {analysisSteps && analysisSteps.length > 0 && (
@@ -29,22 +32,20 @@ function AnalysisResult({ analysisResult, analysisSteps ,setShowCorrection, hand
                         <div className='analysis-result mt-2 text-left'>
                             <strong>Sentiment:</strong> <span className="result-content text-xl">{analysisResult}</span>
 
-                            <Button onClick={() => setShowCorrection(show => !show)} color="green" className='w-full mt-2'>
-                            Verify Sentiment
-                            </Button>
+                            {/* Conditionally render the button based on isAuthenticated */}
+                            {isAuthenticated && (
+                                <Button onClick={() => setShowCorrection(show => !show)} color="green" className='w-full mt-2'>
+                                    Verify Sentiment
+                                </Button>
+                            )}
                             {showCorrection && (
                                 <CorrectionOptions handleSentimentCorrection={handleSentimentCorrection} />
                             )}
                             {feedbackMessage && <FeedbackMessage message={feedbackMessage} />}
                         </div>
-                        
                     )}
                 </div>
             )}
-
-            {/* Only display this section if there is an analysisResult */}
-            
-
         </div>
     );
 }

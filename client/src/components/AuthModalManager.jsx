@@ -6,16 +6,15 @@ import { useSelector } from 'react-redux';
 const AuthenticationModalManager = () => {
     const [modalState, setModalState] = useState('none'); // 'login', 'register', or 'none'
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const isLimitReached = useSelector((state) => state.auth.isLimitReached);
 
     useEffect(() => {
-        // Decide not to show any modals if a token is found or if the user is authenticated
         if (localStorage.getItem('token') || isAuthenticated) {
             setModalState('none');
-        } else {
-            // Default to showing the login modal if not authenticated and no token is present
+        } else if (isLimitReached) {
             setModalState('login');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, isLimitReached]);
 
     return (
         <div>

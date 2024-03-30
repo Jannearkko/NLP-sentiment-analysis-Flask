@@ -18,7 +18,7 @@ def login():
         return jsonify({"msg": "Missing password parameter"}), 400
 
     user = get_user_by_username(username, password)
-    print("user", user)
+    
     if user:
         # Create JWT token if authentication is successful
         access_token = create_access_token(identity=username)
