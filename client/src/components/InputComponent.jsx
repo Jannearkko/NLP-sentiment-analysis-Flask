@@ -99,7 +99,6 @@ function TextInputComponent() {
             setIsLoading(false);
             dispatch(limitReached());
         }
-
     };
     const handleSentimentCorrection = async (sentiment) => {
         setCorrectedSentiment(sentiment);

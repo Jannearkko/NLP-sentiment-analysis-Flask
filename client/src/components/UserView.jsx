@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
+import './css/UserView.css';
 
 const UserView = ({ onLogout }) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -77,12 +78,12 @@ const UserView = ({ onLogout }) => {
           )}
 
           {/* Queries Section */}
-          {queries && queries.length > 0 && (
+          {queries && Array.isArray(queries) && queries.length > 0 && (
             <div className="mt-4">
               <h2 className="text-xl font-semibold mb-2">Your Queries</h2>
               <ul>
                 {queries.map((query) => (
-                  <li key={query.id} className="p-2 hover:bg-gray-200 rounded transition-colors duration-150 text-left ml-3">
+                  <li key={query.id} className="pt-1.5 hover:bg-gray-500 rounded transition-colors duration-150 text-left ml-3 fade-out">
                     {query.text} {/* Render each query text */}
                   </li>
                 ))}

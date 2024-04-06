@@ -30,14 +30,24 @@ def predict_sentiment(json, socketio):
         # check for user
         user = db.get_user(username)
         if user:
+
             document = {
                 'text': text, 
                 'sentiment': result[0], 
                 'username': username, 
                 'sequence': sequence,
-                'padded_sequence': padded_sequence_to_db,
-                'verified': None}
-            inserted_id = db.save_to_train_collection(document)
+                'padded_sequence': padded_sequence_to_db
+            }
+            inserted_id = db.save_to_user_submitted_collection(document)
+
+            train_document = {
+                '_id': inserted_id,
+                'text': text,
+                'sentiment': result[0],
+                'verified': None
+            }
+            db.save_to_train_collection(train_document)
+
             socketio.emit('analysis_update', {'message': 'Text analysed', 'result': result, '_id': str(inserted_id)})
         else:
             document = {'text': text, 'sentiment': result[0]}
@@ -49,7 +59,7 @@ def predict_sentiment(json, socketio):
 def submit_correction(data, socketio):
     document_id = data.get('_id')
     corrected_sentiment = data.get('correctedSentiment')
-    print(data)
+
     if document_id and corrected_sentiment:
         updated_count = db.update_sentiment_by_id(document_id, corrected_sentiment)
         if updated_count:

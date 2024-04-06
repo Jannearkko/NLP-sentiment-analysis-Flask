@@ -32,10 +32,10 @@
 
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg);
+    transform: rotateY(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotateY(360deg);
   }
 }
 #body {
@@ -43,8 +43,10 @@
   width: 100%;
 }
 #sidebar-div {
+  color: white;
   flex: 1;
-  background-color: aliceblue;
+  max-width: 350px;
+  background-color: rgb(92, 108, 121);
 }
 #input-div {
   flex: 4;
