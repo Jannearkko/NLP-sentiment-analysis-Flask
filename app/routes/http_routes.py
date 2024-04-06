@@ -6,6 +6,7 @@ http_routes = Blueprint('http_routes', __name__)
 
 @http_routes.route('/login', methods=['POST'])
 def login():
+    print("request in server: ",request)
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 

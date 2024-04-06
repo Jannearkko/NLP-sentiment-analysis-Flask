@@ -10,6 +10,7 @@ module.exports = {
         'bg-blue-600', 'hover:bg-blue-700',
         'bg-red-600', 'hover:bg-red-700',
         'bg-gray-600', 'hover:bg-gray-700',
+        'text-black'
         // Add more classes as needed
       ],
     },

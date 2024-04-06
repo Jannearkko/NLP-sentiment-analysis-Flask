@@ -11,12 +11,13 @@ const UserView = ({ onLogout }) => {
     const firstname = localStorage.getItem('firstname');
     const lastname = localStorage.getItem('lastname');
     const username = localStorage.getItem('username');
+    const queryUrl = process.env.REACT_APP_NLP_API_QUERY;
 
     const toggleMenu = () => setShowMenu(!showMenu);
 
     const fetchQueries = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/getQueries', {
+            const response = await fetch(queryUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

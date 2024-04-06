@@ -8,10 +8,11 @@ const RegisterModal = ({ onClose }) => {
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [registerError, setRegisterError] = useState('');
+    const registerUrl = process.env.REACT_APP_NLP_API_REGISTER;
 
     const handleRegister = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/register', {
+            const response = await fetch(registerUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,30 +40,30 @@ const RegisterModal = ({ onClose }) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm z-50 flex justify-center items-center">
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
                 <LogoContainer />
-                <h2 className="text-xl font-semibold mb-4 text-left mt-4">Create your account</h2>
+                <h2 className="text-xl font-semibold mb-4 text-left mt-4 text-black">Create your account</h2>
                 <input
-                    className="w-full p-2 border border-gray-300 rounded mb-4"
+                    className="w-full p-2 border border-gray-300 rounded mb-4 text-black"
                     type="text"
                     placeholder="Email Address"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <input
-                    className="w-full p-2 border border-gray-300 rounded mb-4"
+                    className="w-full p-2 border border-gray-300 rounded mb-4 text-black"
                     type="text"
                     placeholder="First Name"
                     value={firstname}
                     onChange={(e) => setFirstname(e.target.value)}
                 />
                 <input
-                    className="w-full p-2 border border-gray-300 rounded mb-4"
+                    className="w-full p-2 border border-gray-300 rounded mb-4 text-black"
                     type="text"
                     placeholder="Last Name"
                     value={lastname}
                     onChange={(e) => setLastname(e.target.value)}
                 />
                 <input
-                    className="w-full p-2 border border-gray-300 rounded mb-4"
+                    className="w-full p-2 border border-gray-300 rounded mb-4 text-black"
                     type="password"
                     placeholder="Password"
                     value={password}

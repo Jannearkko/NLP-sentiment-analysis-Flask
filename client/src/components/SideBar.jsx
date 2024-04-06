@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, setModalState } from '../redux/slices/AuthSlice';
-import Button from './Button';
+import { logout } from '../redux/slices/AuthSlice';
 import Login from './Login';
 import LogoContainer from './LogoContainer';
 import UserView from './UserView';

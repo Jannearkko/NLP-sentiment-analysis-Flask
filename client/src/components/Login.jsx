@@ -8,6 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
     const dispatch = useDispatch();
+    const loginUrl = process.env.REACT_APP_NLP_API_LOGIN;
 
     const handleOpenRegisterModal = () => {
         dispatch(setModalState('register'));
@@ -15,7 +16,8 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/login', {
+
+            const response = await fetch(loginUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,14 +53,14 @@ const Login = () => {
         <div className="w-full max-w-xs mx-auto pt-8">
             <h2 className="text-xl font-semibold mb-4 text-left">Log in to your account</h2>
             <input
-                className="w-full p-2 border border-gray-300 rounded mb-4"
+                className="w-full p-2 border border-gray-300 rounded mb-4 text-black"
                 type="text"
                 placeholder="Email"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
             <input
-                className="w-full p-2 border border-gray-300 rounded mb-4"
+                className="w-full p-2 border border-gray-300 rounded mb-4 text-black"
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -67,7 +69,7 @@ const Login = () => {
             <Button className="w-full" color="green" onClick={handleLogin}>Login</Button>
             <div className="flex items-center justify-center gap-0 mb-2">
                 <span className="flex-1 h-px bg-gray-300"></span>
-                <span className="px-2 text-gray-600 text-sm">Don't have an account?</span>
+                <span className="px-2 text-gray-300 text-sm">Don't have an account?</span>
                 <span className="flex-1 h-px bg-gray-300"></span>
             </div>
             <Button className="w-full" color="blue" onClick={handleOpenRegisterModal}>Sign up</Button>
