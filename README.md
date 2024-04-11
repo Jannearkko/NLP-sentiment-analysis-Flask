@@ -117,7 +117,9 @@
 
     Monia asioita jäi kehittämättä, kuten uusia reitit kutsua rajapintaa ilman käyttöliittymää, mutta sen olin alun perinkin ajatellut kuuluvan eri ajanhetkeen kuin opintojaksojen puitteissa tehtävän harjoitustyön. Aikomukseni on tulevaisuudessa kehittää myös ko. reitit rajapintaan, jotta pystyn mahdollisesti testaamaan rajapintaa esimerkiksi jonkin uutispalvelun avulla. Mielestäni uutisvirtoja tulisi pystyä rajaamaan uutisten ja muiden aiheiden tunnetilan perusteella, koska yhteiskuntamme voi kohtalaisen huonosti. Tästä saatan kehittää itselleni opinnäytetyön aiheen.
 
-    Tein projektia intuitiivisesti ilman suunnitelmia, joten dokumentaatio jäi heikoksi ja ymmärrän nyt paremmin dokumentaation merkityksen, varsinkin suunnitteluvaiheessa. Agileilla metodeilla kehittäessä suunnitelmat eivät välttämättä enää pidä paikkaansa, mutta antaisi se kiintopisteen suurinpiirtein suunnasta mihin kehitystä viedä.
+    Tein projektia intuitiivisesti ilman suunnitelmia, joten dokumentaatio jäi heikoksi ja ymmärrän nyt paremmin dokumentaation merkityksen, varsinkin suunnitteluvaiheessa. Agileilla metodeilla kehittäessä suunnitelmat eivät välttämättä enää pidä paikkaansa, mutta antaisi se kiintopisteen suurinpiirtein suunnasta mihin kehitystä viedä. 
+
+    Tämä raportti myös pitää sisällään osia projektisuunnitelmasta, joten raportin luonne on vähintäänkin epämääräinen ja ei noudata tieteellistä lähestymistapaa. Otan siitä piiskaa tarvittaessa.
 
 
 
