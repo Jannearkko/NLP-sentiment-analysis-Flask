@@ -6,7 +6,7 @@
 
 # Sentimenttianalyysi API ja käyttöliittymä
 
-1. Tausta ja lähtökohdat
+1. **Tausta ja lähtökohdat**
 
     Nykyisessä informaatioyhteiskunnassa tietovirrat ovat jatkuvia ja loputtomia ja ne sisältävät laajan kirjon erilaisia näkökulmia, aiheita ja tunnetiloja. Ihmiset altistuvat päivittäin valtaville määrille tietoa, mikä voi olla sekä hyödyllistä, että haitallista. Monet ihmiset kamppailevat usein löytääkseen jatkuvasta tietovirrasta luotettavaa ja merkityksellistä sisältöä.
 
@@ -14,11 +14,11 @@
 
     Projekti toteutetaan Jyväskylän ammattikorkeakoulun informaatioteknologian instituutin järjestämien ’Deep Learning TTC8060-3008’, ’Web User Interface Programming TTC8420-3005’ sekä ’Web Server Programming TTC8430-3004’ -opintojaksojen yhdistettynä harjoitustyönä.
 
-2. Tavoite
+2. **Tavoite**
 
     Projektin päätavoitteena oli luoda sovellus, jonka rajapintojen kautta voi analysoida erilaisten tekstien sentimentin. Sentimentti voi olla joko positiivista, negatiivista tai neutraalia. Analyysia tuottava malli on kielimalli, jonka taustalla on Long-Short Term Memory (LSTM) algoritmi. Malli on koulutettu avoimen lisenssin datalla käyttäen useita eri lähteitä. Projektin toinen tavoite on parantaa mallin suorituskykyä ja kehittää sovelluksen rajapintaa vastaanottamaan laajoja datavirtoja, jonka jälkeen rajapintaa voisi markkinoida esimerkiksi uutistoimistoille, jotka pystyisivät ajamaan uutisotsikot rajapinnan kautta, saaden näin uutisille sentimenttileiman, jota pystyisi hyödyntämään uutisvirran rajauksessa loppukäyttäjän toimesta. Projektin toista tavoitetta ei käsitellä tässä raportissa enempää vaan se jätetään esimerkiksi opinnäytetyön tutkimusongelmaksi.
 
-3. Vaiheistus
+3. **Vaiheistus**
 
     3.1 Ensimmäinen vaihe
 
@@ -32,7 +32,7 @@
 
     Projektin kolmannessa vaiheessa kehitettiin sovelluksen käyttöliittymä. Käyttöliittymän kehittämiseen käytettiin React-kehystä JavaScript-ohjelmointikielellä. Käyttöliittymä hyödyntää React-Redux Toolkit -kirjastoa istuntojen hallinnassa sekä Tailwind CSS-kehystä liittymän ulkonäön kustomoimisessa.
 
-4. Palvelin
+4. **Palvelin**
 
     4.1 Rakenne
 
@@ -62,7 +62,7 @@
 
     Palvelimella on kahdenlaisia reittejä: WebSocket-reittejä ja HTTP-reittejä. HTTP-reitit ohjaavat kirjautumista ja uloskirjautumista sekä käyttäjän kirjautuneena tekemiä aiempia tekstin analysointeja. WebSocket-reittejä käytetään ainoastaan analysointiin ja sen vaiheiden sekä lopputuloksen lähettämiseen palvelimen ja käyttäjän välillä.
 
-5. Käyttöliittymä
+5. **Käyttöliittymä**
 
     5.1 Rakenne
 
