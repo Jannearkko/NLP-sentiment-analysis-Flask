@@ -121,6 +121,14 @@
 
     Tämä raportti myös pitää sisällään osia projektisuunnitelmasta, joten raportin luonne on vähintäänkin epämääräinen ja ei noudata tieteellistä lähestymistapaa. Otan siitä piiskaa tarvittaessa.
 
+8. Arvosana
+
+    Teknisestä toteutuksesta antaisin itselleni arvosanan 3 tai 4 asteikolla 0-5. Käytin palvelimen kehityksessä kurssin ulkopuolisia tekniikoita ja kieltä sekä integroin tekoälymallin sovellukseen.
+
+    Dokumentaatiosta antaisin itselleni arvosanan 1, koska se on mielestäni huonosti tehty ja ainoa dokumentaation muoto on tämä ns. loppuraportti.
+
+    Kokonaisarvosana: 3/5.
+
 
 
 
