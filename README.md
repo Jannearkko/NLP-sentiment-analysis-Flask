@@ -74,3 +74,8 @@
     Analyysi-elementin pääpiste on syöttökenttä, johon käyttäjä pystyy kirjoittamaan haluamansa analysoitavan tekstin. Analysoivan mallin luonteesta ja kyvyistä johtuen syötekenttää ja siihen kirjattua tekstiä ei validoida, koska tekstin osat voivat olla korreloivia tekstin sentimentin kanssa.
 
     Analyysi-elementin toinen osa on tulos-kenttä, jonne kirjataan palvelimen lähettämät analysoinnin osat ja lopputulos. Koska analysointiin käytettävä malli tarvitsee jatkuvaa harjoittelua, määritetään myös tähän elementtiin mahdollisuus muokata mallin tarjoamaa lopputulosta. Käyttäjä siis pystyy muokkaamaan analysoidun tekstin sentimentin sopivammaksi, joka edesauttaa mallin tulee harjoittelua. Tämä ei kuitenkaan ota huomioon virheellisesti muokattuja sentimenttejä. Korjattu sentimentti muutetaan tietokantaan palvelimen toimesta.
+
+    Käyttöliittymän toinen osio on sivupalkki tai sivuelementti, jonne suunniteltiin sijoitettavaksi kirjautumismahdollisuus, aiempien hakujen esittäminen, mahdollinen sivuston nimi ja logo sekä käyttäjän omien tietojen muokkaus, uloskirjaus ynnä muut päätehtävän ulkopuoliset ominaisuudet.
+
+    ![UI_mockup](./doc/UI_mockup.png)
+    *Kuvio 4. UI Mockup*
