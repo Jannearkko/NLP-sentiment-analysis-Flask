@@ -65,6 +65,9 @@
 
     Palvelimella on kahdenlaisia reittejä: WebSocket-reittejä ja HTTP-reittejä. HTTP-reitit ohjaavat kirjautumista ja uloskirjautumista sekä käyttäjän kirjautuneena tekemiä aiempia tekstin analysointeja. WebSocket-reittejä käytetään ainoastaan analysointiin ja sen vaiheiden sekä lopputuloksen lähettämiseen palvelimen ja käyttäjän välillä.
 
+    ![routes](./doc/routes.png)  
+    *Kuvio 4. Reitit*
+
 5. **Käyttöliittymä**
 
     5.1 Rakenne
@@ -78,7 +81,7 @@
     Käyttöliittymän toinen osio on sivupalkki tai sivuelementti, jonne suunniteltiin sijoitettavaksi kirjautumismahdollisuus, aiempien hakujen esittäminen, mahdollinen sivuston nimi ja logo sekä käyttäjän omien tietojen muokkaus, uloskirjaus ynnä muut päätehtävän ulkopuoliset ominaisuudet.
 
     ![UI_mockup](./doc/UI_mockup.png)
-    *Kuvio 4. UI Mockup*
+    *Kuvio 5. UI Mockup*
 
     5.2 Komponentit
 
@@ -86,4 +89,4 @@
     Seuraavassa kuviossa on esitetty komponenttien hierarkiaa.
 
     ![skeleton](./doc/skeleton.png)  
-    *Kuvio 5. Komponenttihierarkia*
+    *Kuvio 6. Komponenttihierarkia*
