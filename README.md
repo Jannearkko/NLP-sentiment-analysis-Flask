@@ -3,7 +3,7 @@
 | Laatija | Janne Arkko |
 | Versio | 1.6 |
 | Päivämäärä | 11.4.2024 |
-| Linkki | https://github.com/Jannearkko/NLP-sentiment-analysis-Flask |
+| Linkki | [Repositorio](https://github.com/Jannearkko/NLP-sentiment-analysis-Flask) |
 
 # Sentimenttianalyysi API ja käyttöliittymä
 
