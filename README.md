@@ -113,11 +113,13 @@
 
     Päätin käyttää Python-kieltä API:n rakentamiseen siitä syystä, että se on monipuolinen kieli ja samalla sain yhtenäistettyä sekä kielimallin, että serverin ohjelmoinnin, mikä todennäköisesti helpotti paljon projektin läpivientiä.
 
+    Sekä UI, että palvelin pyörivät myös Docker-konteissa, mutta en lisännyt sitä yllä mihinkään kohtaan, koska en saanut niistä Hot-Reloadia toimimaan, joten kontit kyllä saa päälle, mutta kehitystyön olen tehnyt ilman niitä. Kuitenkin mainitsemisen arvoinen asia, koska kontituksen voidaan ajatella olevan nykyään de facto.
+
     Monia asioita jäi kehittämättä, kuten uusia reitit kutsua rajapintaa ilman käyttöliittymää, mutta sen olin alun perinkin ajatellut kuuluvan eri ajanhetkeen kuin opintojaksojen puitteissa tehtävän harjoitustyön. Aikomukseni on tulevaisuudessa kehittää myös ko. reitit rajapintaan, jotta pystyn mahdollisesti testaamaan rajapintaa esimerkiksi jonkin uutispalvelun avulla. Mielestäni uutisvirtoja tulisi pystyä rajaamaan uutisten ja muiden aiheiden tunnetilan perusteella, koska yhteiskuntamme voi kohtalaisen huonosti. Tästä saatan kehittää itselleni opinnäytetyön aiheen.
 
     Tein projektia intuitiivisesti ilman suunnitelmia, joten dokumentaatio jäi heikoksi ja ymmärrän nyt paremmin dokumentaation merkityksen, varsinkin suunnitteluvaiheessa. Agileilla metodeilla kehittäessä suunnitelmat eivät välttämättä enää pidä paikkaansa, mutta antaisi se kiintopisteen suurinpiirtein suunnasta mihin kehitystä viedä.
 
-    
+
 
 
 
