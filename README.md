@@ -79,3 +79,11 @@
 
     ![UI_mockup](./doc/UI_mockup.png)
     *Kuvio 4. UI Mockup*
+
+    5.2 Komponentit
+
+    Käyttöliittymä hyödyntää useita komponentteja. Komponentit on rakennettu palvelemaan yksittäisiä toiminta ja ominaisuuksia.
+    Seuraavassa kuviossa on esitetty komponenttien hierarkiaa.
+
+    ![skeleton](./doc/skeleton.png)
+    *Kuvio 5. Komponenttihierarkia*
