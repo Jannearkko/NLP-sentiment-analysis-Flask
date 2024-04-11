@@ -85,5 +85,5 @@
     Käyttöliittymä hyödyntää useita komponentteja. Komponentit on rakennettu palvelemaan yksittäisiä toiminta ja ominaisuuksia.
     Seuraavassa kuviossa on esitetty komponenttien hierarkiaa.
 
-    ![skeleton](./doc/skeleton.png)
+    ![skeleton](./doc/skeleton.png)  
     *Kuvio 5. Komponenttihierarkia*
