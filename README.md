@@ -36,20 +36,38 @@
 
     4.1 Rakenne
 
-        Palvelimen rakenne on kehitetty niin, että rajapinta vastaanottaa pyyntöjä osoitteessa http://localhost:5000. Käyttöliittymän ja palvelimen keskusteluun käytetään http-protokollaa käyttäjän autentikointiin ja sisäänkirjautumiseen, sekä WebSocket-protokollaa tekstin sentimentin analysointiin ja sen vaiheiden lähettämiseen ja vastaanottamiseen käyttöliittymän ja palvelimen välillä. Tämä mahdollistaa reaaliaikaisen tiedonvaihdon, että turvallisen kirjautumismenettelyn käyttäenistuntomerkkejä (token) istuntojen varmentamiseen sekä tiedonvaihdon staattisen tiedon kanssa, esimerkiksi käyttäjän aiempien analyysien haun tietokannasta käyttäen http-protokollaa.
+    Palvelimen rakenne on kehitetty niin, että rajapinta vastaanottaa pyyntöjä osoitteessa http://localhost:5000. Käyttöliittymän ja palvelimen keskusteluun käytetään http-protokollaa käyttäjän autentikointiin ja sisäänkirjautumiseen, sekä WebSocket-protokollaa tekstin sentimentin analysointiin ja sen vaiheiden lähettämiseen ja vastaanottamiseen käyttöliittymän ja palvelimen välillä. Tämä mahdollistaa reaaliaikaisen tiedonvaihdon, että turvallisen kirjautumismenettelyn käyttäenistuntomerkkejä (token) istuntojen varmentamiseen sekä tiedonvaihdon staattisen tiedon kanssa, esimerkiksi käyttäjän aiempien analyysien haun tietokannasta käyttäen http-protokollaa.
 
-        ![rakenne](./doc/rakenne.png)
+    ![rakenne](./doc/rakenne.png)
 
     4.2 Tietokanta
 
-        Tietokannaksi projektille valittiin MongoDB, koska data, jota tallennetaan ja käytetään, on hyvin yksiselitteistä. Relaatiotietokannan käyttö olisi ollut myös perusteltua, mutta projekti päätettiin viedä tässä vaiheessa eteenpäin ilman relaatiotietokantaa. Erilaisia kokoelmia tietokannassa on yhteensä neljä, jotka on jaoteltu harjoitusdataan, käyttäjädataan, sekä näiden yhdistelmään, joka hyödyntää sentimentin vahvistamista sekä käyttäjäsidonnaisuutta, jolloin pystytään näyttämään käyttöliittymässä käyttäjän aiemmat haut ja tulokset sekä mallin kehittämisessä hyödynnetään pääasiallisesti käyttäjätunnuksella vahvistettujen sentimenttien tuloksia.
+    Tietokannaksi projektille valittiin MongoDB, koska data, jota tallennetaan ja käytetään, on hyvin yksiselitteistä. Relaatiotietokannan käyttö olisi ollut myös perusteltua, mutta projekti päätettiin viedä tässä vaiheessa eteenpäin ilman relaatiotietokantaa. Erilaisia kokoelmia tietokannassa on yhteensä neljä, jotka on jaoteltu harjoitusdataan, käyttäjädataan, sekä näiden yhdistelmään, joka hyödyntää sentimentin vahvistamista sekä käyttäjäsidonnaisuutta, jolloin pystytään näyttämään käyttöliittymässä käyttäjän aiemmat haut ja tulokset sekä mallin kehittämisessä hyödynnetään pääasiallisesti käyttäjätunnuksella vahvistettujen sentimenttien tuloksia.
 
-        ![tietokanta](./doc/tietokanta.png)
+    ![tietokanta](./doc/tietokanta.png)
 
     4.3 Palvelimen toiminta
 
-        Seuraavassa kuviossa on mallinnettu palvelimen toimintaa. Palvelimen toiminta perustuu käyttäjän- ja istunnonhallintaan tietokantaan ja paikalliseen selaimen tallennustilaan talletettavilla istuntomerkeillä eli tokeneilla. Tietokantaan tallennettavaa uusiutuvaa tokenia ei ole tämän dokumentin kirjoitushetkellä vielä sovellukseen lisätty.
+    Seuraavassa kuviossa on mallinnettu palvelimen toimintaa. Palvelimen toiminta perustuu käyttäjän- ja istunnonhallintaan tietokantaan ja paikalliseen selaimen tallennustilaan talletettavilla istuntomerkeillä eli tokeneilla. Tietokantaan tallennettavaa uusiutuvaa tokenia ei ole tämän dokumentin kirjoitushetkellä vielä sovellukseen lisätty.
 
-        ![palvelimen_toiminta](./doc/palvelin_toiminta.png)
+    ![palvelimen_toiminta](./doc/palvelin_toiminta.png)
+
+    Kuvassa palvelimen toiminta on seuraavanlainen: Käyttäjä kirjoittaa analysoitavan tekstin syötekenttään ja lähettää syötteen palvelimelle. Jos käyttäjällä ei ole istuntomerkkiä eli tokenia selaimen tallennustilassa, niin palvelin vastaanottaa, analysoi ja lähettää ainoastaan viisi (5) uniikkia syötettä. Kirjautuneena käyttäjä pystyy hyödyntämään analysointia rajoituksetta.
+
+    Tekstin analysointi tapahtuu WebSocket-protokollaa käyttäen, jolloin saavutetaan reaaliaikainen tiedonjako. Lyhyiden tekstien osalta prosessointi on hyvin nopeaa ja reaaliaikaisuuden hyöty on pieni, mutta pitkien tekstien analysoinnissa käyttäjä pystyy näkemään analysoinnin eri vaiheet.
+
+    Kun käyttäjä rekisteröityy ja kirjautuu sisään niin palvelin tarkistaa käyttäjän olemassaolon tietokannasta, vertaa salattua salasanaa ja jos kaikki täsmää niin käyttäjälle myönnetään istuntomerkki.
+
+    4.4 Reitit
+
+    Palvelimella on kahdenlaisia reittejä: WebSocket-reittejä ja HTTP-reittejä. HTTP-reitit ohjaavat kirjautumista ja uloskirjautumista sekä käyttäjän kirjautuneena tekemiä aiempia tekstin analysointeja. WebSocket-reittejä käytetään ainoastaan analysointiin ja sen vaiheiden sekä lopputuloksen lähettämiseen palvelimen ja käyttäjän välillä.
 
 5. Käyttöliittymä
+
+    5.1 Rakenne
+
+    Käyttöliittymä kehitettiin käyttämällä React-kehystä ja JavaScript ohjelmointikieltä. Käyttöliittymälle asetettiin tavoitteeksi olla mahdollisimman yksinkertainen ja toimiva ja se muodostuisi kahdesta pääelementistä: analyysiin käytettävästä elementistä sekä kirjautumiseen ja staattisten tietojen näyttämiseen käytettävästä sivuelementistä.
+
+    Analyysi-elementin pääpiste on syöttökenttä, johon käyttäjä pystyy kirjoittamaan haluamansa analysoitavan tekstin. Analysoivan mallin luonteesta ja kyvyistä johtuen syötekenttää ja siihen kirjattua tekstiä ei validoida, koska tekstin osat voivat olla korreloivia tekstin sentimentin kanssa.
+
+    Analyysi-elementin toinen osa on tulos-kenttä, jonne kirjataan palvelimen lähettämät analysoinnin osat ja lopputulos. Koska analysointiin käytettävä malli tarvitsee jatkuvaa harjoittelua, määritetään myös tähän elementtiin mahdollisuus muokata mallin tarjoamaa lopputulosta. Käyttäjä siis pystyy muokkaamaan analysoidun tekstin sentimentin sopivammaksi, joka edesauttaa mallin tulee harjoittelua. Tämä ei kuitenkaan ota huomioon virheellisesti muokattuja sentimenttejä. Korjattu sentimentti muutetaan tietokantaan palvelimen toimesta.
