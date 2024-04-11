@@ -52,7 +52,7 @@
 
     Seuraavassa kuviossa on mallinnettu palvelimen toimintaa. Palvelimen toiminta perustuu käyttäjän- ja istunnonhallintaan tietokantaan ja paikalliseen selaimen tallennustilaan talletettavilla istuntomerkeillä eli tokeneilla. Tietokantaan tallennettavaa uusiutuvaa tokenia ei ole tämän dokumentin kirjoitushetkellä vielä sovellukseen lisätty.
 
-    ![palvelimen_toiminta](./doc/palvelin_toiminta.png)
+    ![palvelimen_toiminta](./doc/palvelin_toiminta.png)  
     *Kuvio 3. Palvelimen toiminta*
 
     Kuvassa palvelimen toiminta on seuraavanlainen: Käyttäjä kirjoittaa analysoitavan tekstin syötekenttään ja lähettää syötteen palvelimelle. Jos käyttäjällä ei ole istuntomerkkiä eli tokenia selaimen tallennustilassa, niin palvelin vastaanottaa, analysoi ja lähettää ainoastaan viisi (5) uniikkia syötettä. Kirjautuneena käyttäjä pystyy hyödyntämään analysointia rajoituksetta.
