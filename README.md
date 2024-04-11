@@ -91,3 +91,34 @@
 
     ![skeleton](./doc/skeleton.png)  
     *Kuvio 6. Komponenttihierarkia*
+
+    5.3 Tyyli
+
+    Käyttöliittymän kustomointiin käytettiin Tailwind CSS -kehystä, joka on yleisesti käytössä oleva tyylikehys. 
+
+    ![tailwind](./doc/tailwind.png)  
+    *Kuvio 7. Tailwind-CSS*
+
+6. Aikataulutus
+
+    Käyttöliittymäohjelmoinnin kurssilla oli vaatimus pitää päivittäin kirjaa käytetystä ajasta projektiin. Sitä en ole tehnyt, enkä sitä enää jälkikäteen myöskään tee, koska se ei ole enää mahdollista.
+
+    Projektin aloitin helmi-maaliskuun vaihteessa kun sain harjoitukset Palvelinohjelmoinnin- ja Käyttöliittymäohjelmoinnin -kurssien osalta tehtyä. Eli projektiin on kulunut nyt reilu kuukausi.
+
+    Aikaa projektiin on kulunut yhteensä noin 40-50 tuntia, joka on jakautunut melko tasaisesti sekä UI:n, että palvelimen ohjelmointiin, koska molempia kehitetään samanaikaisesti.
+
+7. Yhteenveto ja pohdinta
+
+    Projekti oli mielenkiintoinen ja ajankohtainen, koska tekoäly valtaa kaikkea toimintaa IT- ja muilla aloilla. Mielestäni on tärkeää kehittää ammattitaitoa tekoälyn suhteen ja sen integroimisesta erilaisiin järjestelmiin. Tämä projekti kehitti niin omaa tekoälyn kehitystaitoa, kuin myös sen lisäämistä ja hyödyntämistä rajapintojen kautta. Tässä tavoitteessa onnistuin mielestäni hienosti. Toki, kehityskohteita on valtavasti ja tunnistan niitä lähes päivittäin, mutta yksinkertaisesti aika ei riitä paneutumaan jokaiseen pieneen nyanssiin. 
+
+    Päätin käyttää Python-kieltä API:n rakentamiseen siitä syystä, että se on monipuolinen kieli ja samalla sain yhtenäistettyä sekä kielimallin, että serverin ohjelmoinnin, mikä todennäköisesti helpotti paljon projektin läpivientiä.
+
+    Monia asioita jäi kehittämättä, kuten uusia reitit kutsua rajapintaa ilman käyttöliittymää, mutta sen olin alun perinkin ajatellut kuuluvan eri ajanhetkeen kuin opintojaksojen puitteissa tehtävän harjoitustyön. Aikomukseni on tulevaisuudessa kehittää myös ko. reitit rajapintaan, jotta pystyn mahdollisesti testaamaan rajapintaa esimerkiksi jonkin uutispalvelun avulla. Mielestäni uutisvirtoja tulisi pystyä rajaamaan uutisten ja muiden aiheiden tunnetilan perusteella, koska yhteiskuntamme voi kohtalaisen huonosti. Tästä saatan kehittää itselleni opinnäytetyön aiheen.
+
+    Tein projektia intuitiivisesti ilman suunnitelmia, joten dokumentaatio jäi heikoksi ja ymmärrän nyt paremmin dokumentaation merkityksen, varsinkin suunnitteluvaiheessa. Agileilla metodeilla kehittäessä suunnitelmat eivät välttämättä enää pidä paikkaansa, mutta antaisi se kiintopisteen suurinpiirtein suunnasta mihin kehitystä viedä.
+
+    
+
+
+
+
